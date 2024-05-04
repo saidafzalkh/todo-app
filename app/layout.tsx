@@ -4,12 +4,13 @@ import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "TODO APP",
-  description: "Minimalistic todo app to daily uses"
+  description: "Minimalistic todo app to daily uses",
 };
 
 interface RootLayoutProps extends Readonly<{ children: ReactNode }> {}
@@ -17,9 +18,10 @@ interface RootLayoutProps extends Readonly<{ children: ReactNode }> {}
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en">
         <head />
-        <body className={cn(inter.className)}>
+        <body className={cn(inter.className)} suppressHydrationWarning>
+          <div className="container">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -27,7 +29,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
+          </div>
         </body>
       </html>
     </>

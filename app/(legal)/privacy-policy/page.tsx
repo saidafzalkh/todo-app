@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <article className="prose lg:prose-xl">
+    <>
       <h1>Privacy Policy</h1>
       <p>
         Welcome to our web application! This Privacy Policy governs the manner
@@ -63,6 +63,6 @@ export default function Page() {
         please contact us at{" "}
         <a href="mailto:saidafzal1209@gmail.com">saidafzal1209@gmail.com</a>.
       </p>
-    </article>
+    </>
   );
 }

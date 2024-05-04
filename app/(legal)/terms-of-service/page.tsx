@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <article className="prose lg:prose-xl">
+    <>
       <h1>Terms of Service</h1>
       <p>
         Welcome to our web application! By accessing and using this web
@@ -53,6 +53,6 @@ export default function Page() {
         conditions, please contact us at{" "}
         <a href="mailto:saidafzal1209@gmail.com">saidafzal1209@gmail.com</a>.
       </p>
-    </article>
+    </>
   );
 }

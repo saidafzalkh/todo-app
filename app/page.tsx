@@ -1,18 +1,15 @@
-import SignIn from "@/components/sign-in";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { auth } from "@/auth";
+import SignInBlock from "@/blocks/sign-in-block";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();
 
-  if (session) redirect("/profile");
+  if (session) redirect("/dashboard");
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ThemeSwitcher />
-
-      <SignIn />
+    <main className="flex h-[90vh] p-4 items-center justify-center">
+      <SignInBlock />
     </main>
   );
 }
