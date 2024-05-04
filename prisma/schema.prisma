@@ -81,7 +81,7 @@ model Task {
     content      String?
     created_at   DateTime  @default(now())
     deadline     DateTime?
-    is_compleate Boolean   @default(false)
+    is_completed Boolean   @default(false)
     creator      User      @relation(fields: [userId], references: [id])
     userId       String
 }
