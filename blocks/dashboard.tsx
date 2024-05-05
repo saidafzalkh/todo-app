@@ -10,6 +10,8 @@ import {
 import type { User } from "next-auth";
 import Tasks from "../components/tasks";
 import CreateTask from "@/components/create-task";
+import { Suspense } from "react";
+import Loading from "@/components/loading";
 
 interface Props extends Readonly<{ user: User }> {}
 

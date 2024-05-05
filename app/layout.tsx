@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import ClientProvider from "./_utils/client-providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,26 +18,26 @@ interface RootLayoutProps extends Readonly<{ children: ReactNode }> {}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <>
-      <html lang="en">
-        <head />
-        <body className={cn(inter.className)} suppressHydrationWarning>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          <footer className="flex w-full justify-center mt-auto">
-            <p className="text-center text-xs">
-              Copyright © {new Date().getFullYear()} | MIT LICENSE
-            </p>
-          </footer>
-        </body>
-      </html>
-    </>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={cn(inter.className)}>
+        <ClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </ClientProvider>
+        <footer className="flex w-full justify-center mt-auto">
+          <p className="text-center text-xs">
+            Copyright © {new Date().getFullYear()} | MIT LICENSE
+          </p>
+        </footer>
+      </body>
+    </html>
   );
 }
