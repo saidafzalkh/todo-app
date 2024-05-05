@@ -6,9 +6,15 @@ export default async function Page() {
   const session = await auth();
   if (!session) return redirect("/");
 
+  if (!session.user)
+    return (
+      <code className="p-4 border">
+        <pre>{JSON.stringify(session.user, null, 2)}</pre>
+      </code>
+    );
+
   return (
     <main className="p-2 sm:p-4">
-      <pre>{JSON.stringify(session, null, 2)}</pre>
       <Dashboard user={session.user} />
     </main>
   );

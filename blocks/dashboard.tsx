@@ -7,29 +7,34 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Session } from "next-auth";
+import type { User } from "next-auth";
 import Tasks from "../components/tasks";
+import CreateTask from "@/components/create-task";
 
-interface Props extends Readonly<{ user: Session["user"] }> {}
+interface Props extends Readonly<{ user: User }> {}
 
 export default function Dashboard({ user }: Props) {
   return (
-    <section>
+    <section className="max-w-[800px] mx-auto">
       <Card>
         <Header user={user} />
         <CardHeader>
-          <CardTitle>Hello, {user?.name}!</CardTitle>
+          <CardTitle>Hello, {user.name}!</CardTitle>
           <CardDescription>
             Welcome to your daily tasks dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tasks />
+          <CreateTask />
         </CardContent>
         <CardFooter className="flex justify-center">
-          <p className="text-center text-sm">
-            Copyright © {new Date().getFullYear()}
-          </p>
+          <a
+            className="text-xs hover:underline"
+            href="https://github.com/saidafzalkh/todo-app"
+          >
+            Source on Github
+          </a>
         </CardFooter>
       </Card>
     </section>

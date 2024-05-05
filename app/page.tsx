@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import SignInBlock from "@/blocks/sign-in-block";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Dashboard() {
   const session = await auth();
 
   if (session) redirect("/dashboard");

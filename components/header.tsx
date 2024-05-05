@@ -1,6 +1,3 @@
-import type { Session } from "next-auth";
-import { ThemeSwitcher } from "./theme-switcher";
-import UserAvatar from "./user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,31 +6,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SignOut } from "./sign-out";
+import type { User } from "next-auth";
 import Link from "next/link";
+import { SignOut } from "./sign-out";
+import { ThemeSwitcher } from "./theme-switcher";
+import UserAvatar from "./user-avatar";
 
-interface Props extends Readonly<{ user: Session["user"] }> {}
+interface Props extends Readonly<{ user: User }> {}
 
 export default function Header({ user }: Props) {
   return (
     <header className="w-full flex justify-end pt-4 px-4 gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <UserAvatar userName={user?.name!} avatarUrl={user?.image!} />
+          <UserAvatar userName={user.name!} avatarUrl={user.image!} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>TODO APP</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <Link
-            href={"/privacy-policy"}
-            className="block cursor-pointer"
-          >
+          <Link href={"/privacy-policy"} className="block cursor-pointer">
             <DropdownMenuItem>Privacy-policy</DropdownMenuItem>
           </Link>
-          <Link
-            href={"/terms-of-service"}
-            className="block cursor-pointer"
-          >
+          <Link href={"/terms-of-service"} className="block cursor-pointer">
             <DropdownMenuItem>Terms of service</DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />
