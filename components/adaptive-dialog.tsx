@@ -22,7 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface Props
   extends Readonly<{
@@ -30,6 +30,8 @@ interface Props
     title: string;
     children?: React.ReactNode;
     description?: string;
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    open: boolean;
   }> {}
 
 export default function AdaptiveDialog({
@@ -37,8 +39,9 @@ export default function AdaptiveDialog({
   title,
   trigger,
   description,
+  setOpen,
+  open
 }: Props) {
-  const [open, setOpen] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {

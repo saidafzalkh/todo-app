@@ -15,7 +15,7 @@ interface Props extends Readonly<{ user: User }> {}
 
 export default function Dashboard({ user }: Props) {
   return (
-    <section className="max-w-[800px] mx-auto">
+    <section className="max-w-[800px] mx-auto mb-2">
       <Card>
         <Header user={user} />
         <CardHeader>
@@ -26,7 +26,7 @@ export default function Dashboard({ user }: Props) {
         </CardHeader>
         <CardContent>
           <Tasks />
-          <CreateTask />
+          <CreateTask user={user} />
         </CardContent>
         <CardFooter className="flex justify-center">
           <a

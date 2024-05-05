@@ -1,7 +1,11 @@
 "use server";
 
-import { prismaClient } from "@/prisma/prisma";
+import { prisma } from "@/prisma/prisma";
 
-export default async function getTasks() {
-  return await prismaClient.task.findMany();
+export default async function getTasks(filter: "latest" | "deadline") {
+  return await prisma.task.findMany({
+    orderBy: {
+      ...(filter === "latest" ? { created_at: "desc" } : { deadline: "desc" }),
+    },
+  });
 }

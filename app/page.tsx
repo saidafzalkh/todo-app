@@ -8,7 +8,7 @@ export default async function Dashboard() {
   if (session) redirect("/dashboard");
 
   return (
-    <main className="flex h-[90vh] p-4 items-center justify-center">
+    <main className="flex h-[90vh] p-4 sm:p-2 items-center justify-center">
       <SignInBlock />
     </main>
   );

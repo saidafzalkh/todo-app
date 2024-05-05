@@ -14,7 +14,7 @@ export default function NothingTodo({ className, ...props }: Props) {
       className={cn(className)}
       {...props}
     >
-      <title>happy_music</title>
+      <title>nothing_todo</title>
       <polygon
         points="887.772 763.25 252.263 772.831 0 728.121 393.817 728.121 887.772 763.25"
         fill="#e6e6e6"
@@ -25,7 +25,7 @@ export default function NothingTodo({ className, ...props }: Props) {
         transform="translate(-156.11386 -63.58465)"
         fill="#3f3d56"
       />
-      <circle cx="171.2269" cy="688.52637" r="15.25711" fill="#000000" />
+      <circle cx="171.2269" cy="688.52637" r="15.25711" fill="#00B0FF" />
       <rect
         x="168.74434"
         y="714.21843"
@@ -38,7 +38,7 @@ export default function NothingTodo({ className, ...props }: Props) {
         transform="translate(-156.11386 -63.58465)"
         fill="#3f3d56"
       />
-      <circle cx="673.67331" cy="693.8489" r="15.25711" fill="#000000" />
+      <circle cx="673.67331" cy="693.8489" r="15.25711" fill="#00B0FF" />
       <rect
         x="671.19075"
         y="719.54095"
@@ -51,7 +51,7 @@ export default function NothingTodo({ className, ...props }: Props) {
         transform="translate(-156.11386 -63.58465)"
         fill="#3f3d56"
       />
-      <circle cx="747.12416" cy="699.17142" r="15.25711" fill="#000000" />
+      <circle cx="747.12416" cy="699.17142" r="15.25711" fill="#00B0FF" />
       <rect
         x="744.64161"
         y="724.86348"
@@ -64,7 +64,7 @@ export default function NothingTodo({ className, ...props }: Props) {
         transform="translate(-156.11386 -63.58465)"
         fill="#3f3d56"
       />
-      <circle cx="291.51598" cy="673.6233" r="15.25711" fill="#000000" />
+      <circle cx="291.51598" cy="673.6233" r="15.25711" fill="#00B0FF" />
       <rect
         x="289.03342"
         y="699.31536"
@@ -77,7 +77,7 @@ export default function NothingTodo({ className, ...props }: Props) {
         transform="translate(-156.11386 -63.58465)"
         fill="#3f3d56"
       />
-      <circle cx="64.77639" cy="678.94583" r="15.25711" fill="#000000" />
+      <circle cx="64.77639" cy="678.94583" r="15.25711" fill="#00B0FF" />
       <rect
         x="62.29383"
         y="704.63788"
@@ -120,16 +120,16 @@ export default function NothingTodo({ className, ...props }: Props) {
       <path
         d="M393.47351,507.83307h0a48.89061,48.89061,0,0,1,48.89061,48.89061v24.44543a48.89061,48.89061,0,0,1-48.89061,48.89061h0a0,0,0,0,1,0,0V507.83307A0,0,0,0,1,393.47351,507.83307Z"
         transform="translate(679.72382 1074.30814) rotate(180)"
-        fill="#000000"
+        fill="#00B0FF"
       />
       <path
         d="M598.30346,444.24843h0A48.89061,48.89061,0,0,1,647.19412,493.139v24.44543a48.89061,48.89061,0,0,1-48.89061,48.89061h0a0,0,0,0,1,0,0V444.24843A0,0,0,0,1,598.30346,444.24843Z"
-        fill="#000000"
+        fill="#00B0FF"
       />
       <path
         d="M780.03662,560.56514H772.2795c0-98.37742-80.03569-178.41374-178.41374-178.41374-98.37742,0-178.41374,80.03632-178.41374,178.41374H407.6949c0-102.655,83.51592-186.17086,186.17086-186.17086C696.52134,374.39428,780.03662,457.91019,780.03662,560.56514Z"
         transform="translate(-156.11386 -63.58465)"
-        fill="#000000"
+        fill="#00B0FF"
       />
       <polygon
         points="131.69 367.997 131.69 367.997 131.69 367.997 131.69 367.997"

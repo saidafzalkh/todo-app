@@ -14,7 +14,7 @@ export default async function Page() {
     );
 
   return (
-    <main className="p-2 sm:p-4">
+    <main className="p-0 sm:p-4">
       <Dashboard user={session.user} />
     </main>
   );

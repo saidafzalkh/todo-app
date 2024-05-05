@@ -21,7 +21,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en">
         <head />
         <body className={cn(inter.className)} suppressHydrationWarning>
-          <div className="container">
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -31,8 +30,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {children}
               <Toaster />
             </ThemeProvider>
-          </div>
-
           <footer className="flex w-full justify-center mt-auto">
             <p className="text-center text-xs">
               Copyright © {new Date().getFullYear()} | MIT LICENSE
