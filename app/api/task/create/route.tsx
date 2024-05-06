@@ -9,6 +9,6 @@ export const POST = auth(async function POST(req) {
 
   const data: Prisma.TaskCreateInput = await req.json();
 
-  await prisma.task.create({ data });
-  return NextResponse.json({ message: "task created" }, { status: 200 });
+  const task = await prisma.task.create({ data });
+  return NextResponse.json(task, { status: 200 });
 });

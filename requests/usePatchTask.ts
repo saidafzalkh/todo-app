@@ -3,25 +3,23 @@
 import { useToast } from "@/components/ui/use-toast";
 import ENDPOINTS from "@/configs/api";
 import { Prisma, Task } from "@prisma/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function usePostTask() {
+export default function usePatchTask() {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: Prisma.TaskCreateInput) => {
-      const api = ENDPOINTS.POST.TASK;
-      return await axios.post<Task>(api, data);
+    mutationFn: async (data: Prisma.TaskUpdateInput) => {
+      const api = ENDPOINTS.PATCH.TASK(data.id as string);
+      delete data.id;
+      return await axios.patch<Task>(api, data);
     },
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
-        title: "🎉 Task created",
-        description: "Task created!",
+        description: "✨ Task updated",
       });
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
 
     onError: (err) => {

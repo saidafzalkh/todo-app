@@ -1,13 +1,5 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
-import useGetTasks from "@/requests/useGetTasks";
-import { Task } from "@prisma/client";
-import { format } from "date-fns";
-import NothingTodo from "./illustrations/nothing-todo";
-import Loading from "./loading";
-import { ScrollArea } from "./ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -17,15 +9,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useGetTasks from "@/requests/useGetTasks";
 import { FilterT } from "@/types/filter.type";
+import { Task as TaskType } from "@prisma/client";
 import { useState } from "react";
+import NothingTodo from "./illustrations/nothing-todo";
+import Loading from "./loading";
+import Task from "./task";
+import { ScrollArea } from "./ui/scroll-area";
 
 export default function Tasks() {
   const [filter, setFilter] = useState<FilterT>("latest");
   const { data, isLoading, refetch } = useGetTasks(filter);
-  const tasks: Task[] = data?.data;
-
-  const today = new Date();
+  const tasks: TaskType[] = data?.data;
 
   return (
     <div className="p-4 border mb-4">
@@ -53,57 +49,20 @@ export default function Tasks() {
       <ScrollArea className="h-[290px] rounded-md border mt-4 p-2">
         {isLoading ? (
           <Loading />
-        ) : (
+        ) : tasks.length > 0 ? (
           <ul>
-            {tasks.length > 0 ? (
-              <>
-                <li className="w-full flex justify-between items-center py-2 px-1 border-b">
-                  <span>Title</span>
-                  <span>Deadline</span>
-                </li>
-                {tasks.map((task) => (
-                  <li
-                    key={task.id}
-                    className="w-full flex justify-between items-center py-2 px-1 border-b hover:bg-accent"
-                  >
-                    <label className="flex gap-2 items-center cursor-pointer">
-                      <Checkbox />
-                      <span
-                        className={cn(
-                          task.is_completed &&
-                            "line-through text-muted-foreground"
-                        )}
-                      >
-                        {task.content}
-                      </span>
-                    </label>
-                    <div className="text-end ">
-                      {task.deadline ? (
-                        <span
-                          className={cn(
-                            new Date(task.deadline) < today &&
-                              !task.is_completed &&
-                              "text-red-300",
-                            format(task.deadline, "PP") ==
-                              format(today, "PP") && "text-yellow-600",
-                            task.is_completed && "text-muted-foreground"
-                          )}
-                        >
-                          {format(task.deadline, "PP")}
-                        </span>
-                      ) : (
-                        <span className="pr-1">-</span>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </>
-            ) : (
-              <li className="flex flex-col gap-2 items-center justify-center h-full">
-                <NothingTodo className="max-w-[250px] h-auto fill-foreground" />
-              </li>
-            )}
+            <li className="w-full flex justify-between items-center py-2 px-1 border-b">
+              <span>Title</span>
+              <span>Deadline</span>
+            </li>
+            {tasks.map((task) => (
+              <Task task={task} key={task.id} />
+            ))}
           </ul>
+        ) : (
+          <div className="flex flex-col gap-2 items-center justify-center h-full">
+            <NothingTodo className="max-w-[250px] h-auto fill-foreground" />
+          </div>
         )}
       </ScrollArea>
     </div>

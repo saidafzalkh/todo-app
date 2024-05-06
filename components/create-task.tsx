@@ -134,6 +134,7 @@ export default function CreateTask({ user }: Props) {
                         return date < today;
                       }}
                       initialFocus
+                      weekStartsOn={1}
                     />
                   </PopoverContent>
                 </Popover>
