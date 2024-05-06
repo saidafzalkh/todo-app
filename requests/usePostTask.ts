@@ -16,10 +16,9 @@ export default function usePostTask() {
       return await axios.post<Task>(api, data);
     },
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
-        title: "🎉 Task created",
-        description: "Task created!",
+        description: "🎉 Task is created",
       });
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },

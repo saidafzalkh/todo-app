@@ -1,3 +1,4 @@
+import logout from "@/actions/logout";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { User } from "next-auth";
 import Link from "next/link";
-import { SignOut } from "./sign-out";
 import { ThemeSwitcher } from "./theme-switcher";
 import UserAvatar from "./user-avatar";
+import { Button } from "./ui/button";
 
 interface Props extends Readonly<{ user: User }> {}
 
@@ -24,17 +25,29 @@ export default function Header({ user }: Props) {
         <DropdownMenuContent>
           <DropdownMenuLabel>TODO APP</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <Link href={"/privacy-policy"} className="block cursor-pointer">
-            <DropdownMenuItem>Privacy-policy</DropdownMenuItem>
-          </Link>
-          <Link href={"/terms-of-service"} className="block cursor-pointer">
-            <DropdownMenuItem>Terms of service</DropdownMenuItem>
-          </Link>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            {/* <LogOut className="mr-2 h-4 w-4" /> */}
-            <SignOut className="w-full h-full" />
+          <DropdownMenuItem asChild>
+            <Link href={"/privacy-policy"} className="block cursor-pointer">
+              Privacy-policy
+            </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href={"/terms-of-service"} className="block cursor-pointer">
+              Terms of service
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <form action={logout}>
+            <DropdownMenuItem asChild>
+              <Button
+                variant={"destructive"}
+                size={"sm"}
+                type="submit"
+                className="w-full cursor-pointer"
+              >
+                Log Out
+              </Button>
+            </DropdownMenuItem>
+          </form>
         </DropdownMenuContent>
       </DropdownMenu>
 
