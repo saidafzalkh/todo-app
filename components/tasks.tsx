@@ -24,7 +24,7 @@ export default function Tasks() {
   const tasks: TaskType[] = data?.data;
 
   return (
-    <div className="p-4 border mb-4">
+    <>
       <div aria-label="filter" className="w-full flex justify-end">
         <Select
           defaultValue="latest"
@@ -65,6 +65,6 @@ export default function Tasks() {
           </div>
         )}
       </ScrollArea>
-    </div>
+    </>
   );
 }

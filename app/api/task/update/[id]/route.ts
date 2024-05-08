@@ -12,7 +12,17 @@ export const PATCH = auth(async function PATCH(req, ctx) {
 
   const id = ctx.params.id as string;
   const data: Prisma.TaskUpdateInput = await req.json();
-  const task = await prisma.task.update({ where: { id }, data });
 
-  return NextResponse.json(task);
+  try {
+    const task = await prisma.task.update({ where: { id }, data });
+
+    return NextResponse.json(task);
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
+  }
 });

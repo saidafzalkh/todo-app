@@ -26,11 +26,11 @@ export default function Dashboard({ user }: Props) {
             Welcome to your daily tasks dashboard
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0 px-2 space-y-4">
           <Tasks />
           <CreateTask user={user} />
         </CardContent>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex justify-center mt-4">
           <a
             className="text-xs hover:underline"
             href="https://github.com/saidafzalkh/todo-app"

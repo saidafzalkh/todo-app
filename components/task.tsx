@@ -33,7 +33,7 @@ export default function Task({ task }: Props) {
       <label className="flex hover:bg-muted w-full justify-between items-center py-2 px-1 cursor-pointer">
         <div className="flex items-center gap-2">
           {isPending ? (
-            <PuffLoader color="#00B0FF" size={14} />
+            <PuffLoader color="#00B0FF" size={16} />
           ) : (
             <Checkbox
               onCheckedChange={(value: boolean) => {
@@ -51,7 +51,7 @@ export default function Task({ task }: Props) {
             {task.content}
           </span>
         </div>
-        <div className="text-end ">
+        <div className="text-end">
           {task.deadline ? (
             <span
               className={cn(
@@ -71,17 +71,19 @@ export default function Task({ task }: Props) {
 
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Button size={"icon"} variant={'ghost'} className="!rounded-none">
+          <Button size={"icon"} variant={"ghost"} className="!rounded-none">
             <EllipsisVertical size={16} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem asChild></DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <button className="w-full">Edit</button>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <button className="w-full bg-destructive">Delete</button>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </li>
