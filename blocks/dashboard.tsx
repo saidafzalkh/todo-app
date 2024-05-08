@@ -15,7 +15,7 @@ interface Props extends Readonly<{ user: User }> {}
 
 export default function Dashboard({ user }: Props) {
   return (
-    <section className="max-w-[800px] mx-auto mb-2">
+    <section className="w-[800px] mx-auto mb-2">
       <Card>
         <Header user={user} />
         <CardHeader className="px-4 py-2">
@@ -24,7 +24,7 @@ export default function Dashboard({ user }: Props) {
             Welcome to your daily tasks dashboard
           </CardDescription>
         </CardHeader>
-        <CardContent className="p-0 px-2 space-y-4">
+        <CardContent className="p-0 px-2 space-y-2">
           <Tasks />
           <CreateTask user={user} />
         </CardContent>

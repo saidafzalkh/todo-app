@@ -24,19 +24,20 @@ interface Props extends Readonly<{ task: TaskType }> {}
 
 export default function Task({ task }: Props) {
   const { isPending, mutate: update, isError } = usePatchTask();
-  const { mutate: deleteTask } = useDeleteTask();
+  const { mutate: deleteTask, isError: isNotDeleted } = useDeleteTask();
   const [checked, setChecked] = useState<boolean>(task.is_completed);
   const [deleted, setDeleted] = useState<boolean>(false);
   const today = new Date();
+
   useEffect(() => {
     if (isError) setChecked(task.is_completed);
   }, [isError, task]);
 
-  if (deleted) return <></>;
+  if (deleted && !isNotDeleted) return <></>;
 
   return (
     <li className="flex items-center border-b py-1">
-      <label className="flex hover:bg-muted w-full justify-between items-center py-2 px-1 cursor-pointer">
+      <label className="flex hover:bg-muted w-full justify-between items-center py-2 px-1 mr-1 cursor-pointer">
         <div className="w-[200px] sm:w-auto flex items-center gap-2">
           {isPending ? (
             <PuffLoader color="#00B0FF" size={16} />

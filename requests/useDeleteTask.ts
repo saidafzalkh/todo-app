@@ -20,7 +20,7 @@ export default function useDeleteTask() {
       toast({
         description: "💥 Task is deleted",
       });
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      // queryClient.refetchQueries({ queryKey: ["tasks"] });
     },
 
     onError: (err) => {
@@ -30,6 +30,7 @@ export default function useDeleteTask() {
         title: "🚨 Error",
         description: err.message,
       });
+      queryClient.refetchQueries({ queryKey: ["tasks"] });
     },
   });
 }

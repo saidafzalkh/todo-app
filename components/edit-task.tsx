@@ -18,19 +18,16 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import usePostTask from "@/requests/usePostTask";
+import usePatchTask from "@/requests/usePatchTask";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Task } from "@prisma/client";
 import { format } from "date-fns";
 import { CalendarIcon, Pencil } from "lucide-react";
-import { User } from "next-auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ScaleLoader } from "react-spinners";
 import { z } from "zod";
 import AdaptiveDialog from "./adaptive-dialog";
-import { ScaleLoader } from "react-spinners";
-import type { Task } from "@prisma/client";
-import usePatchTask from "@/requests/usePatchTask";
-import useGetTasks from "@/requests/useGetTasks";
 
 const formSchema = z.object({
   content: z
@@ -69,9 +66,8 @@ export default function EditTask({ task }: Props) {
     setOpen(false);
     form.reset({
       content: task.content as string,
-      deadline: task.deadline || undefined,
+      deadline: task.deadline ? new Date(task.deadline) : undefined,
     });
-    
   }, [form, isSuccess, task]);
 
   return (

@@ -59,7 +59,7 @@ export default function Tasks() {
           </SelectContent>
         </Select>
       </div>
-      <ScrollArea className="h-[400px] rounded-md border mt-4 p-2 pr-3">
+      <ScrollArea className="h-[400px] rounded-md border p-2 pr-3">
         {isLoading ? (
           <Loading />
         ) : tasks.length > 0 ? (

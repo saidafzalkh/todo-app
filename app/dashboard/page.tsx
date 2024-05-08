@@ -14,7 +14,7 @@ export default async function Page() {
     );
 
   return (
-    <main className="p-0 sm:p-4">
+    <main className="p-0 sm:px-4 sm:py-2 lg:px-6">
       <Dashboard user={session.user} />
     </main>
   );

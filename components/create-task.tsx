@@ -73,11 +73,7 @@ export default function CreateTask({ user }: Props) {
   return (
     <AdaptiveDialog
       title="Create task"
-      trigger={
-        <Button className="w-full" variant="outline">
-          Create task
-        </Button>
-      }
+      trigger={<Button className="w-full" variant={'secondary'}>Create task</Button>}
       description="Enter task title and deadline (optional)"
       setOpen={setOpen}
       open={open}
