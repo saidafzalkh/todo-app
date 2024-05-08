@@ -17,7 +17,7 @@ interface Props extends Readonly<{ user: User }> {}
 
 export default function Header({ user }: Props) {
   return (
-    <header className="w-full flex justify-end pt-4 px-4 gap-2">
+    <header className="w-full flex justify-end pt-2 px-4 gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <UserAvatar userName={user.name!} avatarUrl={user.image!} />

@@ -1,1 +1,1 @@
-export type FilterT = "latest" | "deadline";
+export type FilterT = "latest" | "deadline" | "uncompleted";

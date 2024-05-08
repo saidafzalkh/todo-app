@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/select";
 import useGetTasks from "@/requests/useGetTasks";
 import { FilterT } from "@/types/filter.type";
-import { Task as TaskType } from "@prisma/client";
+import type { Task as TaskType } from "@prisma/client";
+import { RotateCcw } from "lucide-react";
 import { useState } from "react";
 import NothingTodo from "./illustrations/nothing-todo";
 import Loading from "./loading";
 import Task from "./task";
+import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 
 export default function Tasks() {
@@ -25,7 +27,17 @@ export default function Tasks() {
 
   return (
     <>
-      <div aria-label="filter" className="w-full flex justify-end">
+      <div aria-label="filter" className="w-full flex justify-end gap-2">
+        <Button
+          onClick={() => {
+            refetch();
+          }}
+          type="button"
+          size={"icon"}
+          variant={"outline"}
+        >
+          <RotateCcw size={16} />
+        </Button>
         <Select
           defaultValue="latest"
           onValueChange={(value: FilterT) => {
@@ -42,18 +54,22 @@ export default function Tasks() {
               <SelectLabel>Sort by</SelectLabel>
               <SelectItem value="latest">Created date</SelectItem>
               <SelectItem value="deadline">Deadline</SelectItem>
+              <SelectItem value="uncompleted">Uncompleted</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
-      <ScrollArea className="h-[290px] rounded-md border mt-4 p-2 pr-3">
+      <ScrollArea className="h-[400px] rounded-md border mt-4 p-2 pr-3">
         {isLoading ? (
           <Loading />
         ) : tasks.length > 0 ? (
           <ul>
             <li className="w-full flex justify-between items-center py-2 px-1 border-b">
               <span>Title</span>
-              <span>Deadline</span>
+              <div className="flex gap-8">
+                <span>Deadline</span>
+                <span>Actions</span>
+              </div>
             </li>
             {tasks.map((task) => (
               <Task task={task} key={task.id} />

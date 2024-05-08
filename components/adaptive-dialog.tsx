@@ -26,7 +26,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 interface Props
   extends Readonly<{
-    trigger: string;
+    trigger: React.ReactNode;
     title: string;
     children?: React.ReactNode;
     description?: string;
@@ -40,16 +40,14 @@ export default function AdaptiveDialog({
   trigger,
   description,
   setOpen,
-  open
+  open,
 }: Props) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="w-full" variant="outline">{trigger}</Button>
-        </DialogTrigger>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
@@ -63,9 +61,7 @@ export default function AdaptiveDialog({
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button className="w-full" variant="outline">{trigger}</Button>
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>{title}</DrawerTitle>

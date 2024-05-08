@@ -1,3 +1,4 @@
+import CreateTask from "@/components/create-task";
 import Header from "@/components/header";
 import {
   Card,
@@ -9,9 +10,6 @@ import {
 } from "@/components/ui/card";
 import type { User } from "next-auth";
 import Tasks from "../components/tasks";
-import CreateTask from "@/components/create-task";
-import { Suspense } from "react";
-import Loading from "@/components/loading";
 
 interface Props extends Readonly<{ user: User }> {}
 
@@ -20,7 +18,7 @@ export default function Dashboard({ user }: Props) {
     <section className="max-w-[800px] mx-auto mb-2">
       <Card>
         <Header user={user} />
-        <CardHeader>
+        <CardHeader className="px-4 py-2">
           <CardTitle>Hello, {user.name}!</CardTitle>
           <CardDescription>
             Welcome to your daily tasks dashboard
@@ -30,13 +28,16 @@ export default function Dashboard({ user }: Props) {
           <Tasks />
           <CreateTask user={user} />
         </CardContent>
-        <CardFooter className="flex justify-center mt-4">
+        <CardFooter className="flex gap-2 justify-center px-0 py-2">
           <a
             className="text-xs hover:underline"
             href="https://github.com/saidafzalkh/todo-app"
           >
             Source on Github
           </a>
+          <span className="text-xs">
+            | Copyright © {new Date().getFullYear()}
+          </span>
         </CardFooter>
       </Card>
     </section>

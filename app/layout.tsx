@@ -32,11 +32,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Toaster />
           </ThemeProvider>
         </ClientProvider>
-        <footer className="flex w-full justify-center mt-auto">
-          <p className="text-center text-xs">
-            Copyright © {new Date().getFullYear()} | MIT LICENSE
-          </p>
-        </footer>
       </body>
     </html>
   );

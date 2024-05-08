@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma";
+import { FilterT } from "@/types/filter.type";
 import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(req) {
@@ -16,12 +17,27 @@ export const GET = auth(async function GET(req) {
     );
   }
 
-  const isLatest = filter === "latest";
+  let sortOptions = {};
+
+  switch (filter as FilterT) {
+    case "latest":
+      sortOptions = { created_at: "desc" };
+      break;
+    case "deadline":
+      sortOptions = { deadline: "asc" };
+      break;
+    case "uncompleted":
+      sortOptions = { is_completed: "asc" };
+      break;
+    default:
+      sortOptions = {};
+      break;
+  }
 
   try {
     const tasks = await prisma.task.findMany({
       where: { userId: req.auth.user?.id },
-      orderBy: { ...(isLatest ? { created_at: "desc" } : { deadline: "asc" }) },
+      orderBy: sortOptions,
     });
 
     return NextResponse.json(tasks, { status: 200 });

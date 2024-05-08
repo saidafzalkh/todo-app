@@ -9,29 +9,35 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import useDeleteTask from "@/requests/useDeleteTask";
 import usePatchTask from "@/requests/usePatchTask";
 import type { Task as TaskType } from "@prisma/client";
 import { format } from "date-fns";
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PuffLoader } from "react-spinners";
-import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
+import EditTask from "./edit-task";
 
 interface Props extends Readonly<{ task: TaskType }> {}
 
 export default function Task({ task }: Props) {
   const { isPending, mutate: update, isError } = usePatchTask();
+  const { mutate: deleteTask } = useDeleteTask();
   const [checked, setChecked] = useState<boolean>(task.is_completed);
+  const [deleted, setDeleted] = useState<boolean>(false);
   const today = new Date();
   useEffect(() => {
     if (isError) setChecked(task.is_completed);
   }, [isError, task]);
 
+  if (deleted) return <></>;
+
   return (
-    <li className="flex border-b">
+    <li className="flex items-center border-b py-1">
       <label className="flex hover:bg-muted w-full justify-between items-center py-2 px-1 cursor-pointer">
-        <div className="flex items-center gap-2">
+        <div className="w-[200px] sm:w-auto flex items-center gap-2">
           {isPending ? (
             <PuffLoader color="#00B0FF" size={16} />
           ) : (
@@ -55,9 +61,9 @@ export default function Task({ task }: Props) {
           {task.deadline ? (
             <span
               className={cn(
-                new Date(task.deadline) < today && !checked && "text-red-300",
+                new Date(task.deadline) < today && !checked && "text-red-500",
                 format(task.deadline, "PP") == format(today, "PP") &&
-                  "text-yellow-600",
+                  "text-amber-400",
                 checked && "text-muted-foreground"
               )}
             >
@@ -69,7 +75,21 @@ export default function Task({ task }: Props) {
         </div>
       </label>
 
-      <DropdownMenu>
+      <div className="flex gap-2">
+        <EditTask task={task} />
+        <Button 
+          variant={'destructive'}
+          size={'icon'}
+          onClick={() => {
+            deleteTask(task.id);
+            setDeleted(true);
+          }}
+        >
+          <Trash size={16} />
+        </Button>
+      </div>
+
+      {/* <DropdownMenu>
         <DropdownMenuTrigger>
           <Button size={"icon"} variant={"ghost"} className="!rounded-none">
             <EllipsisVertical size={16} />
@@ -79,13 +99,13 @@ export default function Task({ task }: Props) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <button className="w-full">Edit</button>
+            
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <button className="w-full bg-destructive">Delete</button>
+            
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
     </li>
   );
 }

@@ -21,13 +21,16 @@ import { cn } from "@/lib/utils";
 import usePostTask from "@/requests/usePostTask";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Pencil } from "lucide-react";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import AdaptiveDialog from "./adaptive-dialog";
 import { ScaleLoader } from "react-spinners";
+import type { Task } from "@prisma/client";
+import usePatchTask from "@/requests/usePatchTask";
+import useGetTasks from "@/requests/useGetTasks";
 
 const formSchema = z.object({
   content: z
@@ -40,9 +43,9 @@ const formSchema = z.object({
   deadline: z.date().optional(),
 });
 
-interface Props extends Readonly<{ user: User }> {}
+interface Props extends Readonly<{ task: Required<Task> }> {}
 
-export default function CreateTask({ user }: Props) {
+export default function EditTask({ task }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,12 +54,12 @@ export default function CreateTask({ user }: Props) {
     },
   });
 
-  const mutation = usePostTask();
+  const mutation = usePatchTask(true);
   const { isPending, isSuccess } = mutation;
 
   function onSubmit({ content, deadline }: z.infer<typeof formSchema>) {
     mutation.mutate({
-      creator: { connect: { id: user.id } },
+      id: task.id,
       content,
       deadline,
     });
@@ -65,20 +68,21 @@ export default function CreateTask({ user }: Props) {
   useEffect(() => {
     setOpen(false);
     form.reset({
-      content: "",
-      deadline: undefined,
+      content: task.content as string,
+      deadline: task.deadline || undefined,
     });
-  }, [form, isSuccess]);
+    
+  }, [form, isSuccess, task]);
 
   return (
     <AdaptiveDialog
-      title="Create task"
+      title="Edit task"
       trigger={
-        <Button className="w-full" variant="outline">
-          Create task
+        <Button variant={"outline"} size={"icon"}>
+          <Pencil size={16} />
         </Button>
       }
-      description="Enter task title and deadline (optional)"
+      description="Edit your task title and deadline (optional)"
       setOpen={setOpen}
       open={open}
     >
@@ -132,8 +136,10 @@ export default function CreateTask({ user }: Props) {
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) => {
-                        const today = new Date();
-                        today.setDate(today.getDate() - 1);
+                        const today = task.deadline
+                          ? new Date(task.deadline)
+                          : new Date();
+                        !task.deadline && today.setDate(today.getDate() - 1);
 
                         return date < today;
                       }}
@@ -149,7 +155,7 @@ export default function CreateTask({ user }: Props) {
           />
 
           <Button className="w-full" type="submit" disabled={isPending}>
-            {isPending ? <ScaleLoader color="#00B0FF" height={16} /> : "Create"}
+            {isPending ? <ScaleLoader color="#00B0FF" height={16} /> : "Update"}
           </Button>
         </form>
       </Form>

@@ -2,6 +2,7 @@
 
 import ENDPOINTS from "@/configs/api";
 import { FilterT } from "@/types/filter.type";
+import type { Task } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 

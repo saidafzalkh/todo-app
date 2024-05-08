@@ -3,11 +3,12 @@
 import { useToast } from "@/components/ui/use-toast";
 import ENDPOINTS from "@/configs/api";
 import { Prisma, Task } from "@prisma/client";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function usePatchTask() {
+export default function usePatchTask(refetch?: boolean) {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: Prisma.TaskUpdateInput) => {
@@ -20,6 +21,7 @@ export default function usePatchTask() {
       toast({
         description: "✨ Task is updated",
       });
+      refetch && queryClient.refetchQueries({ queryKey: ["tasks"] });
     },
 
     onError: (err) => {

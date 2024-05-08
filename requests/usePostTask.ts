@@ -20,7 +20,7 @@ export default function usePostTask() {
       toast({
         description: "🎉 Task is created",
       });
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.refetchQueries({queryKey: ["tasks"]})
     },
 
     onError: (err) => {
