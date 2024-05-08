@@ -76,7 +76,7 @@ export default function Tasks() {
             ))}
           </ul>
         ) : (
-          <div className="flex flex-col gap-2 items-center justify-center h-full">
+          <div className="flex flex-col gap-2 items-center justify-center h-[350px]">
             <NothingTodo className="max-w-[250px] h-auto fill-foreground" />
           </div>
         )}
